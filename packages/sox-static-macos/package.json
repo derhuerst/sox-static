@@ -1,0 +1,26 @@
+{
+	"name": "sox-static-macos",
+	"description": "Static sox binary for MacOS.",
+	"version": "1.0.0",
+	"main": "index.js",
+	"files": [
+		"index.js",
+		"sox"
+	],
+	"keywords": [
+		"sox",
+		"static",
+		"binary",
+		"mac",
+		"macos",
+		"osx"
+	],
+	"author": "Sox maintainers",
+	"homepage": "http://sox.sourceforge.net/",
+	"repository": "derhuerst/sox-static",
+	"bugs": "https://github.com/derhuerst/sox-static/issues",
+	"license": "LGPL-2.1-only",
+	"engines": {
+		"node": ">=4"
+	}
+}
