@@ -1,0 +1,24 @@
+{
+	"name": "sox-static-linux",
+	"description": "Static sox binary for Linux.",
+	"version": "1.0.0",
+	"main": "index.js",
+	"files": [
+		"index.js",
+		"sox"
+	],
+	"keywords": [
+		"sox",
+		"static",
+		"binary",
+		"linux"
+	],
+	"author": "Sox maintainers",
+	"homepage": "http://sox.sourceforge.net/",
+	"repository": "derhuerst/sox-static",
+	"bugs": "https://github.com/derhuerst/sox-static/issues",
+	"license": "LGPL-2.1-only",
+	"engines": {
+		"node": ">=4"
+	}
+}

@@ -5,4 +5,4 @@ cd sox-src
 
 ./configure
 make -s
-cp src/sox ../sox
+./src/sox -h
