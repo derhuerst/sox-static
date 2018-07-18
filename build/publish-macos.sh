@@ -13,4 +13,5 @@ ls -lh .
 
 npm i semver --no-save
 npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info sox-static-macos version))
+echo "//registry.npmjs.org/:_authToken=$NPM_KEY" >~/.npmrc
 npm publish

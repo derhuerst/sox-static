@@ -12,8 +12,8 @@ addons:
 script:
   - './build/download.sh'
   - './build/make.sh'
-  - '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ] && ./build/publish-linux.sh'
-  - '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ] && ./build/publish-macos.sh'
+  - 'if [[ ( "$TRAVIS_BRANCH" == "master" ) && ( "$TRAVIS_OS_NAME" == "linux" ) ]]; then ./build/publish-linux.sh; fi'
+  - 'if [[ "$TRAVIS_BRANCH" == "master" ) && ( "$TRAVIS_OS_NAME" == "osx" ) ]]; then ./build/publish-macos.sh; fi'
 notifications:
   email:
     on_success: never
