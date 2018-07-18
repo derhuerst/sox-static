@@ -2,6 +2,10 @@ sudo: false
 language: node_js
 node_js:
   - 'stable'
+script:
+  - './build/download.sh'
+  - './build/make.sh'
+  - 'npm test'
 notifications:
   email:
     on_success: never

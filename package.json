@@ -4,7 +4,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"files": [
-		"index.js"
+		"index.js",
+		"sox"
 	],
 	"keywords": [
 		"sox",
@@ -29,7 +30,7 @@
 	"devDependencies": {
 	},
 	"scripts": {
-		"test": "test.sh",
+		"test": "./test.sh",
 		"prepublishOnly": "npm run build && npm test"
 	}
 }
