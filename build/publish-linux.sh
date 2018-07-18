@@ -11,6 +11,4 @@ cp sox-src/README.osx packages/sox-static-linux/_README.osx
 cd packages/sox-static-linux
 ls -lh .
 
-npm i semver --no-save
-npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info sox-static-linux version))
 npm publish
