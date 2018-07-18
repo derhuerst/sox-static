@@ -1,0 +1,35 @@
+{
+	"name": "sox-static",
+	"description": "Static sox binaries for MacOS, Linux and Windows.",
+	"version": "1.0.0",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"sox",
+		"static",
+		"library",
+		"binary",
+		"binaries",
+		"mac",
+		"linux",
+		"windows"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/sox-static",
+	"repository": "derhuerst/sox-static",
+	"bugs": "https://github.com/derhuerst/sox-static/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"dependencies": {
+	},
+	"devDependencies": {
+	},
+	"scripts": {
+		"test": "test.sh",
+		"prepublishOnly": "npm run build && npm test"
+	}
+}
