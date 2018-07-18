@@ -11,4 +11,5 @@ cp sox-src/README.osx packages/sox-static-macos/_README.osx
 cd packages/sox-static-macos
 ls -lh .
 
+echo "//registry.npmjs.org/:_authToken=$NPM_KEY" >~/.npmrc
 npm publish
