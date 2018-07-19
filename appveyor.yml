@@ -6,7 +6,7 @@ platform:
 install:
   - npm install
 build_script:
-  - curl -L -# -o sox.tar.gz 'https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz'
+  - Invoke-WebRequest 'https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz' -OutFile sox.tar.gz
   - tar -x -z -C sox-src --strip-components 1 -f sox.tar.gz
   - cd sox-src
   - configure
