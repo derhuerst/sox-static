@@ -5,13 +5,13 @@ platform:
 install:
   - npm install
 build_script:
-  - ./build/download.sh
+  - build\download.sh
   - cd sox-src
-  - ./configure
+  - configure
   - make -s
 # todo: test
 after_build:
   - npm i semver --no-save
-  - npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info sox-static-macos version))
+  - npm version --no-git-tag-version --force $(node_modules\.bin\semver -i minor $(npm info sox-static-macos version))
   - ps: '"//registry.npmjs.org/:_authToken=$env:NPM_KEY`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
   - npm publish
