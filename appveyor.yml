@@ -10,7 +10,7 @@ build_script:
   - ./configure
   - make -s
 # todo: test
-publish:
+after_build:
   - npm i semver --no-save
   - npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info sox-static-macos version))
   - ps: '"//registry.npmjs.org/:_authToken=$env:NPM_KEY`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
