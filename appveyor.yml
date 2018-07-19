@@ -4,11 +4,12 @@ platform:
   - x64
 install:
   - npm install
-build:
+build_script:
   - ./build/download.sh
   - cd sox-src
   - ./configure
   - make -s
+# todo: test
 publish:
   - npm i semver --no-save
   - npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info sox-static-macos version))
