@@ -3,6 +3,7 @@ set +e
 cd $(dirname $(dirname $(realpath $0)))
 
 cp sox-src/src/sox packages/sox-static-macos/
+cp -r sox-src/src/.libs packages/sox-static-linux/
 cp sox-src/AUTHORS packages/sox-static-macos/
 cp sox-src/LICENSE.LGPL packages/sox-static-macos/LICENSE
 cp sox-src/README packages/sox-static-macos/_README
