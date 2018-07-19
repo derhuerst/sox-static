@@ -26,6 +26,8 @@
 		"node": ">=6"
 	},
 	"dependencies": {
+		"sox-static-linux": "^1.1.0",
+		"sox-static-macos": "^1.0.0"
 	},
 	"devDependencies": {
 	},

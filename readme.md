@@ -18,8 +18,12 @@ npm install sox-static
 
 ## Usage
 
-```js
-todo
+Returns the path of the `sox` binary on the local filesystem.
+
+``` js
+const pathToSox = require('sox-static-macos')
+console.log(pathToSox)
+// /Users/j/playground/node_modules/sox-static-macos/sox
 ```
 
 
