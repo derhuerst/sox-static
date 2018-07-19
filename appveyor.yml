@@ -8,6 +8,7 @@ install:
 build_script:
   - curl -L -# -o sox.tar.gz https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz
   - tar -x -z -C sox-src --strip-components 1 -f sox.tar.gz
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   - cd sox-src
   - sh configure
   - make -s
