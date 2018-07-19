@@ -1,5 +1,6 @@
+os: Visual Studio 2015
 environment:
-  nodejs_version: 'latest'
+  nodejs_version: latest
 platform:
   - x64
 install:
