@@ -13,6 +13,7 @@ shrinkwrap.yaml
 /sox-src
 
 /packages/*/sox
+/packages/*/.libs
 /packages/*/AUTHORS
 /packages/*/_README*
 /packages/*/LICENSE

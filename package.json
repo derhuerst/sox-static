@@ -33,6 +33,7 @@
 	},
 	"scripts": {
 		"test": "./test.sh",
+		"build-packages": "./build/download.sh && ./build/make.sh",
 		"prepublishOnly": "npm run build && npm test"
 	}
 }
