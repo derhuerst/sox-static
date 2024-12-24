@@ -1,0 +1,46 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node-version: [lts/*]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Linux Dependencies
+      if: runner.os == 'Linux'
+      run: sudo apt-get update && sudo apt-get install -y realpath
+
+    - name: Download Dependencies
+      run: ./build/download.sh
+
+    - name: Build
+      run: ./build/make.sh
+
+    - name: Publish Linux Package
+      if: github.ref == 'refs/heads/master' && runner.os == 'Linux'
+      run: ./build/publish-linux.sh
+      env:
+        NPM_KEY: ${{ secrets.NPM_KEY }}
+
+    - name: Publish macOS Package
+      if: github.ref == 'refs/heads/master' && runner.os == 'macOS'
+      run: ./build/publish-macos.sh
+      env:
+        NPM_KEY: ${{ secrets.NPM_KEY }}
