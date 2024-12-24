@@ -3,8 +3,10 @@
 	"description": "Static sox binaries for MacOS, Linux and Windows.",
 	"version": "1.0.0",
 	"main": "index.js",
+	"types": "index.d.ts",
 	"files": [
 		"index.js",
+		"index.d.ts",
 		"sox"
 	],
 	"keywords": [
