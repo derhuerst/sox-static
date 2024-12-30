@@ -1,52 +1,48 @@
 #!/bin/sh
-set -euo pipefail
+set -euox pipefail
 cd $(dirname $(dirname $(realpath $0)))
 
-# Detect platform
 platform=$(uname -s)
+cd sox-src
+make clean
 
 if [ "$platform" = "Darwin" ]; then
     echo "Building for macOS (Universal Binary)..."
     
     # Build for Intel (x86_64)
-    mkdir -p sox-build/x86_64
-    cd sox-src
-    CFLAGS="-arch x86_64 -Wno-incompatible-function-pointer-types" ./configure --prefix=$(pwd)/../sox-build/x86_64
+    CFLAGS="-arch x86_64 -Wno-incompatible-function-pointer-types" ./configure --enable-static
     make -s
-    make install
+    mkdir -p ../sox-build/x86_64
+    cp ./src/sox ../sox-build/x86_64/sox
+    cp -r ./src/.libs ../sox-build/x86_64/
     make clean
 
     # Build for ARM (arm64)
-    mkdir -p sox-build/arm64
-    CFLAGS="-arch arm64 -Wno-incompatible-function-pointer-types" ./configure --prefix=$(pwd)/../sox-build/arm64
+    mkdir -p ../sox-build/arm64
+    CFLAGS="-arch arm64 -Wno-incompatible-function-pointer-types" ./configure --enable-static
     make -s
-    make install
+    mkdir -p ../sox-build/arm64
+    cp ./src/sox ../sox-build/arm64/sox
+    cp -r ./src/.libs ../sox-build/arm64/
     make clean
 
     # Create universal binary
-    cd ../sox-build
-    mkdir -p universal/bin
-    lipo -create x86_64/bin/sox arm64/bin/sox -output universal/bin/sox
-    lipo -create x86_64/bin/soxi arm64/bin/soxi -output universal/bin/soxi
-    lipo -create x86_64/bin/play arm64/bin/play -output universal/bin/play
-    lipo -create x86_64/bin/rec arm64/bin/rec -output universal/bin/rec
-    
-    # Create universal lib directory and combine libraries
-    mkdir -p universal/lib
-    for lib in x86_64/lib/*.dylib; do
+    mkdir -p ../sox-build/universal/.libs
+    lipo -create "../sox-build/x86_64/sox" "../sox-build/arm64/sox" -output "../sox-build/universal/sox"
+
+    for lib in ../sox-build/x86_64/.libs/*.dylib; do
         base_lib=$(basename "$lib")
-        if [ -f "arm64/lib/$base_lib" ]; then
-            lipo -create "x86_64/lib/$base_lib" "arm64/lib/$base_lib" -output "universal/lib/$base_lib"
+        if [ -f "../sox-build/arm64/.libs/$base_lib" ]; then
+            lipo -create "../sox-build/x86_64/.libs/$base_lib" "../sox-build/arm64/.libs/$base_lib" -output "../sox-build/universal/.libs/$base_lib"
         fi
     done
 
+    ../sox-build/universal/sox -h
 elif [ "$platform" = "Linux" ]; then
-    echo "Building for Linux (x86_64)..."
-    
-    cd sox-src
-    ./configure --prefix=$(pwd)/../sox-build/x86_64
+    echo "Building for Linux..."
+    CFLAGS="-Wno-incompatible-function-pointer-types" ./configure
     make -s
-    make install
+    ./src/sox -h
 else
     echo "Unsupported platform: $platform"
     exit 1
