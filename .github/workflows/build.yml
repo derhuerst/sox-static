@@ -11,15 +11,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        node-version: [lts/*]
+        node-version: [6.x, 8.x, 10.x, 12.x, 14.x, 16.x, lts/*]
     
     runs-on: ${{ matrix.os }}
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -33,14 +33,37 @@ jobs:
     - name: Build
       run: ./build/make.sh
 
+  publish:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Download Dependencies
+      run: ./build/download.sh
+
+    - name: Build
+      run: ./build/make.sh
+
     - name: Publish Linux Package
-      if: github.ref == 'refs/heads/master' && runner.os == 'Linux'
+      if: runner.os == 'Linux'
       run: ./build/publish-linux.sh
       env:
         NPM_KEY: ${{ secrets.NPM_KEY }}
 
     - name: Publish macOS Package
-      if: github.ref == 'refs/heads/master' && runner.os == 'macOS'
+      if: runner.os == 'macOS'
       run: ./build/publish-macos.sh
       env:
         NPM_KEY: ${{ secrets.NPM_KEY }}
