@@ -1,10 +1,14 @@
-name: Build and Publish
+name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ master ]
+    branches:
+      - '*'
+  # make this workflow callable from other workflows
+  workflow_call:
 
 jobs:
   build:
@@ -32,38 +36,3 @@ jobs:
 
     - name: Build
       run: ./build/make.sh
-
-  publish:
-    needs: build
-    if: github.ref == 'refs/heads/master'
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-
-    - name: Download Dependencies
-      run: ./build/download.sh
-
-    - name: Build
-      run: ./build/make.sh
-
-    - name: Publish Linux Package
-      if: runner.os == 'Linux'
-      run: ./build/publish-linux.sh
-      env:
-        NPM_KEY: ${{ secrets.NPM_KEY }}
-
-    - name: Publish macOS Package
-      if: runner.os == 'macOS'
-      run: ./build/publish-macos.sh
-      env:
-        NPM_KEY: ${{ secrets.NPM_KEY }}
