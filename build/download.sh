@@ -1,6 +1,7 @@
 #!/bin/sh
-set +e
+set -euo pipefail
 cd $(dirname $(dirname $(realpath $0)))
+set -x
 
 tar_exec=$(command -v gtar)
 if [ $? -ne 0 ]; then

@@ -12,8 +12,12 @@ if (!platform) {
   process.exit(1)
 }
 
-if (os.arch() !== 'x64') {
-  console.error('Unsupported architecture.')
+const arch = os.arch()
+if (platform === 'macos' && arch !== 'x64' && arch !== 'arm64') {
+  console.error(`Unsupported architecture ${arch} on macOS. Only x64 and arm64 are supported.`)
+  process.exit(1)
+} else if (platform !== 'macos' && arch !== 'x64') {
+  console.error(`Unsupported architecture ${arch}. Only x64 is supported on ${platform}.`)
   process.exit(1)
 }
 

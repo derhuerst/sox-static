@@ -11,6 +11,7 @@ shrinkwrap.yaml
 
 /sox.tar.gz
 /sox-src
+/sox-build
 
 /packages/*/sox
 /packages/*/.libs

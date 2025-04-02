@@ -1,6 +1,7 @@
 #!/bin/sh
-set +e
+set -euo pipefail
 cd $(dirname $(dirname $(realpath $0)))
+set -x
 
 cp sox-src/src/sox packages/sox-static-linux/
 cp -r sox-src/src/.libs packages/sox-static-linux/
