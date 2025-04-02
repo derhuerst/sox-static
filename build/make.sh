@@ -1,6 +1,7 @@
 #!/bin/sh
-set -euox pipefail
+set -euo pipefail
 cd $(dirname $(dirname $(realpath $0)))
+set -x
 
 platform=$(uname -s)
 cd sox-src
