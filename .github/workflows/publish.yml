@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+defaults:
+  run:
+    shell: bash -euxo pipefail {0}
+
 jobs:
   build:
     name: build

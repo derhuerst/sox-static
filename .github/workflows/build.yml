@@ -10,6 +10,10 @@ on:
   # make this workflow callable from other workflows
   workflow_call:
 
+defaults:
+  run:
+    shell: bash -euxo pipefail {0}
+
 jobs:
   build:
     strategy:

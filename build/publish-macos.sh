@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 cd $(dirname $(dirname $(realpath $0)))
+set -x
 
 cp sox-src/src/sox packages/sox-static-macos/
 cp -r sox-src/src/.libs packages/sox-static-macos/

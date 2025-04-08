@@ -7,6 +7,8 @@ if [ $? -ne 0 ]; then
 	tar_exec=$(command -v tar)
 fi
 
+set -x
+
 # todo: there are more recent releases on https://codeberg.org/sox_ng/sox_ng/releases
 
 curl -L -# -o sox.tar.gz 'https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz'
