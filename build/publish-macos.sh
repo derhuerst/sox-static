@@ -1,5 +1,5 @@
-#!/bin/sh
-set +e
+#!/bin/bash
+set -euo pipefail
 cd $(dirname $(dirname $(realpath $0)))
 
 cp sox-src/src/sox packages/sox-static-macos/
